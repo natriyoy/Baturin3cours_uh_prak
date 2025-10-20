@@ -265,11 +265,6 @@
 </head>
 <body>
 <div class="coming-soon-banner">
-  <!-- Декоративные элементы -->
-  <div class="banner-decoration decoration-1">🍍</div>
-  <div class="banner-decoration decoration-2">🥭</div>
-  <div class="banner-decoration decoration-3">🍈</div>
-  <div class="banner-decoration decoration-4">🍉</div>
 
   <!-- Логотип -->
   <div class="logo">
@@ -297,41 +292,5 @@
     <div class="fruit-icon">🍌</div>
   </div>
 
-
-<script>
-  // Обратный отсчет до 14 дней от текущей даты
-  function updateCountdown() {
-    const now = new Date();
-    const targetDate = new Date(now);
-    targetDate.setDate(now.getDate() + 14);
-
-    const timeDifference = targetDate - now;
-
-    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-    document.getElementById('days').textContent = days.toString().padStart(2, '0');
-    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-  }
-
-  // Обновляем каждую секунду
-  setInterval(updateCountdown, 1000);
-  updateCountdown(); // Первоначальный вызов
-
-  // Обработчик формы
-  document.querySelector('.notify-btn').addEventListener('click', function() {
-    const email = document.querySelector('.email-input').value;
-    if (email) {
-      alert('Спасибо! Мы сообщим вам об открытии первыми!');
-      document.querySelector('.email-input').value = '';
-    } else {
-      alert('Пожалуйста, введите ваш email');
-    }
-  });
-</script>
 </body>
 </html>
