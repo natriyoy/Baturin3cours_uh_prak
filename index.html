@@ -31,7 +31,9 @@
       justify-content: center;
       padding: 20px;
     }
-
+    a {
+      text-decoration: none;
+    }
     .coming-soon-banner {
       background: rgba(255, 255, 255, 0.95);
       border-radius: 30px;
@@ -207,12 +209,17 @@
     }
 
     .fruit-icons {
+
       display: flex;
       justify-content: center;
       gap: 2rem;
       margin-top: 2rem;
       position: relative;
       z-index: 2;
+      .fruit-icon {
+        font-size: 3rem;: ;
+      }
+
     }
 
 
@@ -260,7 +267,7 @@
 
   <!-- Логотип -->
   <div class="logo">
-    <div class="logo-icon">🥭</div>
+    <a href="_banner.html"><div class="logo-icon">🥭</div></a>
     <div class="logo-text">Fruit Paradise</div>
   </div>
 
@@ -281,7 +288,7 @@
 
   <!-- Иконки фруктов -->
   <div class="fruit-icons">
-    <div class="fruit-icon">🥥</div>
+    <div class="fruit-icon" >🥥</div>
     <div class="fruit-icon">🍍</div>
     <div class="fruit-icon">🥭</div>
     <div class="fruit-icon">🍈</div>
