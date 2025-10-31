@@ -238,6 +238,8 @@ header {
 
       .nav-menu {
         gap: 15px;
+        text-align: center;
+        flex-wrap: wrap;
       }
     }
   }
