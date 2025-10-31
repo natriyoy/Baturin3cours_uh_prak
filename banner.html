@@ -1,49 +1,151 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Скоро открытие! | Fruit Paradise</title>
-    <link rel="stylesheet" href="./src/css/banner.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Скоро открытие! | Fruit Paradise</title>
+  <link rel="stylesheet" href="./src/css/banner.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("7s0tj5XkYrRFXiVG2"); // Ваш PUBLIC_KEY
+    })();
+  </script>
 </head>
 <body>
-<script>
-</script>
-<header class="glass" >
-    <nav class="nav">
-        <div class="logo">Fruit Paradise</div>
-        <ul class="nav-menu">
-            <li><a class="nav-menu-cl" href="#home">Главная</a></li>
-            <li><a class="nav-menu-cl" href="#fruits">Каталог</a></li>
-            <li><a class="nav-menu-cl" href="#about">О нас</a></li>
-            <li><a class="nav-menu-cl" href="#contact">Контакты</a></li>
-        </ul>
-    </nav>
-
+<header class="glass">
+  <nav class="nav">
+    <div class="logo">
+      <span class="logo-icon">🍍</span>
+      Fruit Paradise
+    </div>
+    <ul class="nav-menu">
+      <li><a class="nav-menu-cl" href="#home">Главная</a></li>
+      <li><a class="nav-menu-cl" href="#fruits">Каталог</a></li>
+      <li><a class="nav-menu-cl" href="#about">О нас</a></li>
+      <li><a class="nav-menu-cl" href="#contact">Контакты</a></li>
+    </ul>
+  </nav>
 </header>
 
-<div class="promo-banner glass">
-  <div class="badge">ОГРАНИЧЕННОЕ ПРЕДЛОЖЕНИЕ</div>
-  <h1 class="title">Первый заказ со <span class="discount">-30%</span> скидкой!</h1>
-  <p class="description">Откройте для себя мир тропических фруктов с специальным предложением для новых клиентов. Сочные манго, сладкие ананасы и экзотические деликатесы ждут вас!</p>
+<div class="container">
+  <div class="promo-banner glass">
+    <div class="badge">СКОРО ОТКРЫТИЕ</div>
+    <h1 class="title">Fruit Paradise <span class="highlight">открывается</span> скоро!</h1>
+    <p class="description">Первым 100 клиентам - скидка 30% на первую покупку! Оставьте email и мы сообщим вам об открытии.</p>
 
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon">🚚</div>
-      <span>Бесплатная доставка</span>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🚚</div>
+        <span>Бесплатная доставка</span>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⭐</div>
+        <span>Гарантия свежести</span>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎁</div>
+        <span>Подарок к заказу</span>
+      </div>
     </div>
-    <div class="feature">
-      <div class="feature-icon">⭐</div>
-      <span>Гарантия свежести</span>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🎁</div>
-      <span>Подарок к заказу</span>
+
+    <form id="notification-form" class="notification-form">
+      <input type="email" class="email-input" placeholder="Введите ваш email" required id="email">
+      <button type="submit" class="cta-button" id="submit-btn">Уведомить меня об открытии</button>
+    </form>
+    <div id="form-message" style="display: none; margin-top: 15px; padding: 10px; border-radius: 8px; text-align: center;"></div>
+
+    <div class="counter-section">
+      <div class="counter-title">До открытия осталось:</div>
+      <div class="counter">
+        <div class="counter-item">
+          <span class="counter-number" id="days">--</span>
+          <span class="counter-label">дней</span>
+        </div>
+        <div class="counter-item">
+          <span class="counter-number" id="hours">--</span>
+          <span class="counter-label">часов</span>
+        </div>
+        <div class="counter-item">
+          <span class="counter-number" id="minutes">--</span>
+          <span class="counter-label">минут</span>
+        </div>
+      </div>
     </div>
   </div>
-  <div></div>
-  <button class="cta-button">ПОЛУЧИТЬ СКИДКУ 30%</button>
-  <div class="timer">До конца акции осталось: <span class="time-left">3 дня 12 часов</span></div>
 </div>
+
+<script>
+  // Обработчик формы с вашими ключами
+  document.getElementById('notification-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const button = document.getElementById('submit-btn');
+    const messageDiv = document.getElementById('form-message');
+    const originalText = button.textContent;
+
+    // Валидация email
+    if (!validateEmail(email)) {
+      showMessage('❌ Пожалуйста, введите корректный email адрес', 'error', messageDiv);
+      return;
+    }
+
+    // Показываем загрузку
+    button.textContent = 'Отправка...';
+    button.disabled = true;
+    messageDiv.style.display = 'none';
+
+    // Параметры для EmailJS
+    const templateParams = {
+      to_email: 'baturindaniil31@gmail.com', // ЗАМЕНИТЕ на ваш реальный email
+      from_email: email,
+      user_email: email,
+      subject: 'Новый подписчик Fruit Paradise',
+      message: `Новый подписчик: ${email} хочет узнать об открытии Fruit Paradise!`,
+      date: new Date().toLocaleString('ru-RU'),
+      promo_code: 'FRUIT30'
+    };
+
+    // Отправка через EmailJS с вашими ключами
+    emailjs.send('service_up3drvq', 'template_2lv23ui', templateParams) // ЗАМЕНИТЕ YOUR_TEMPLATE_ID
+      .then(function(response) {
+        showMessage('✅ Спасибо! Мы уведомим вас на адрес ' + email + ' об открытии магазина!', 'success', messageDiv);
+        document.getElementById('email').value = '';
+      })
+      .catch(function(error) {
+        showMessage('❌ Произошла ошибка. Пожалуйста, попробуйте еще раз.', 'error', messageDiv);
+        console.error('EmailJS error:', error);
+      })
+      .finally(function() {
+        button.textContent = originalText;
+        button.disabled = false;
+      });
+  });
+
+  // Функция валидации email
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  // Функция показа сообщений
+  function showMessage(text, type, messageDiv) {
+    messageDiv.textContent = text;
+    messageDiv.style.display = 'block';
+    messageDiv.style.background = type === 'success' ? '#d4edda' : '#f8d7da';
+    messageDiv.style.color = type === 'success' ? '#155724' : '#721c24';
+    messageDiv.style.border = type === 'success' ? '1px solid #c3e6cb' : '1px solid #f5c6cb';
+
+    // Автоскрытие сообщения через 5 секунд
+    setTimeout(() => {
+      messageDiv.style.display = 'none';
+    }, 5000);
+  }
+
+  setInterval(updateCountdown, 60000);
+
+</script>
 </body>
 </html>
