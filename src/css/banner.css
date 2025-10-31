@@ -66,6 +66,7 @@ header {
       display: flex;
       margin: 0;
       padding: 0;
+      flex-wrap: wrap;
 
       .nav-menu-cl {
         text-decoration: none;
