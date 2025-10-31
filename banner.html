@@ -56,21 +56,22 @@
     </form>
     <div id="form-message" style="display: none; margin-top: 15px; padding: 10px; border-radius: 8px; text-align: center;"></div>
 
-    <div class="counter-section">
-      <div class="counter-title">До открытия осталось:</div>
-      <div class="counter">
-        <div class="counter-item">
-          <span class="counter-number" id="days">--</span>
-          <span class="counter-label">дней</span>
-        </div>
-        <div class="counter-item">
-          <span class="counter-number" id="hours">--</span>
-          <span class="counter-label">часов</span>
-        </div>
-        <div class="counter-item">
-          <span class="counter-number" id="minutes">--</span>
-          <span class="counter-label">минут</span>
-        </div>
+    <div class="countdown">
+      <div class="countdown-item">
+        <span id="days" class="countdown-number">00</span>
+        <span class="countdown-label">дней</span>
+      </div>
+      <div class="countdown-item">
+        <span id="hours" class="countdown-number">00</span>
+        <span class="countdown-label">часов</span>
+      </div>
+      <div class="countdown-item">
+        <span id="minutes" class="countdown-number">00</span>
+        <span class="countdown-label">минут</span>
+      </div>
+      <div class="countdown-item">
+        <span id="seconds" class="countdown-number">00</span>
+        <span class="countdown-label">секунд</span>
       </div>
     </div>
   </div>
@@ -145,7 +146,39 @@
   }
 
   setInterval(updateCountdown, 60000);
+  // Таймер обратного отсчета
+  function updateCountdown() {
+    // Устанавливаем дату открытия (например, через 30 дней от текущей даты)
+    const openingDate = new Date(2025, 10, 22);
+    openingDate.setHours(0, 0, 0, 0);
 
+    const now = new Date().getTime();
+    const distance = openingDate - now;
+
+    // Если время вышло
+    if (distance < 0) {
+      document.querySelector('.countdown').innerHTML = '<div style="font-size: 2rem; color: var(--accent-green);">Мы открылись! 🎉</div>';
+      return;
+    }
+
+    // Расчет дней, часов, минут и секунд
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Обновление элементов на странице
+    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+  }
+
+  // Обновляем таймер каждую секунду
+  setInterval(updateCountdown, 1000);
+
+  // Запускаем таймер сразу при загрузке страницы
+  updateCountdown();
 </script>
 </body>
 </html>
