@@ -7,15 +7,11 @@
   <link rel="stylesheet" href="./src/css/banner.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script>
-    (function() {
-      emailjs.init("7s0tj5XkYrRFXiVG2"); // Ваш PUBLIC_KEY
-    })();
-  </script>
+
 </head>
 <body>
-<header class="glass">
-  <nav class="nav">
+<header>
+  <nav class="nav glass">
     <div class="logo">
       <span class="logo-icon">🍍</span>
       Fruit Paradise
@@ -25,6 +21,7 @@
       <li><a class="nav-menu-cl" href="#fruits">Каталог</a></li>
       <li><a class="nav-menu-cl" href="#about">О нас</a></li>
       <li><a class="nav-menu-cl" href="#contact">Контакты</a></li>
+      <li class="lig-dark nav-menu-cl" id="themeToggle">Тeма</li>
     </ul>
   </nav>
 </header>
@@ -49,121 +46,39 @@
         <span>Подарок к заказу</span>
       </div>
     </div>
+  </div>
+</div>
+<div class="container">
+  <div class="promo-banner glass">
+    <div class="badge">СКОРО ОТКРЫТИЕ</div>
+    <h1 class="title">Fruit Paradise <span class="highlight">открывается</span> скоро!</h1>
+    <p class="description">Первым 100 клиентам - скидка 30% на первую покупку! Оставьте email и мы сообщим вам об открытии.</p>
 
-    <form id="notification-form" class="notification-form">
-      <input type="email" class="email-input" placeholder="Введите ваш email" required id="email">
-      <button type="submit" class="cta-button" id="submit-btn">Уведомить меня об открытии</button>
-    </form>
-    <div id="form-message" style="display: none; margin-top: 15px; padding: 10px; border-radius: 8px; text-align: center;"></div>
-
-    <div class="counter-section">
-      <div class="counter-title">До открытия осталось:</div>
-      <div class="counter">
-        <div class="counter-item">
-          <span class="counter-number" id="days">--</span>
-          <span class="counter-label">дней</span>
-        </div>
-        <div class="counter-item">
-          <span class="counter-number" id="hours">--</span>
-          <span class="counter-label">часов</span>
-        </div>
-        <div class="counter-item">
-          <span class="counter-number" id="minutes">--</span>
-          <span class="counter-label">минут</span>
-        </div>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🚚</div>
+        <span>Бесплатная доставка</span>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⭐</div>
+        <span>Гарантия свежести</span>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎁</div>
+        <span>Подарок к заказу</span>
       </div>
     </div>
   </div>
 </div>
-
 <script>
-  // Обработчик формы с вашими ключами
-  document.getElementById('notification-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const email = document.getElementById('email').value;
-    const button = document.getElementById('submit-btn');
-    const messageDiv = document.getElementById('form-message');
-    const originalText = button.textContent;
-
-    // Валидация email
-    if (!validateEmail(email)) {
-      showMessage('❌ Пожалуйста, введите корректный email адрес', 'error', messageDiv);
-      return;
+  document.getElementById('themeToggle').addEventListener('click', function() {
+    const currentTheme = document.body.className;
+    if (currentTheme === 'light-theme') {
+      document.body.className = 'dark-theme';
+    } else {
+      document.body.className = 'light-theme';
     }
-
-    // Показываем загрузку
-    button.textContent = 'Отправка...';
-    button.disabled = true;
-    messageDiv.style.display = 'none';
-
-    // Параметры для EmailJS
-    const templateParams = {
-      to_email: 'baturindaniil31@gmail.com', // ЗАМЕНИТЕ на ваш реальный email
-      from_email: email,
-      user_email: email,
-      subject: 'Новый подписчик Fruit Paradise',
-      message: `Новый подписчик: ${email} хочет узнать об открытии Fruit Paradise!`,
-      date: new Date().toLocaleString('ru-RU'),
-      promo_code: 'FRUIT30'
-    };
-
-    // Отправка через EmailJS с вашими ключами
-    emailjs.send('service_up3drvq', 'template_2lv23ui', templateParams) // ЗАМЕНИТЕ YOUR_TEMPLATE_ID
-      .then(function(response) {
-        showMessage('✅ Спасибо! Мы уведомим вас на адрес ' + email + ' об открытии магазина!', 'success', messageDiv);
-        document.getElementById('email').value = '';
-      })
-      .catch(function(error) {
-        showMessage('❌ Произошла ошибка. Пожалуйста, попробуйте еще раз.', 'error', messageDiv);
-        console.error('EmailJS error:', error);
-      })
-      .finally(function() {
-        button.textContent = originalText;
-        button.disabled = false;
-      });
   });
-
-  // Функция валидации email
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }
-
-  // Функция показа сообщений
-  function showMessage(text, type, messageDiv) {
-    messageDiv.textContent = text;
-    messageDiv.style.display = 'block';
-    messageDiv.style.background = type === 'success' ? '#d4edda' : '#f8d7da';
-    messageDiv.style.color = type === 'success' ? '#155724' : '#721c24';
-    messageDiv.style.border = type === 'success' ? '1px solid #c3e6cb' : '1px solid #f5c6cb';
-
-    // Автоскрытие сообщения через 5 секунд
-    setTimeout(() => {
-      messageDiv.style.display = 'none';
-    }, 5000);
-  }
-
-  // Обратный отсчет до открытия
-  function updateCountdown() {
-    const openingDate = new Date('2024-02-01').getTime();
-    const now = new Date().getTime();
-    const distance = openingDate - now;
-
-    if (distance > 0) {
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-      document.getElementById('days').textContent = String(days).padStart(2, '0');
-      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    }
-  }
-
-  // Обновляем счетчик каждую минуту
-  setInterval(updateCountdown, 60000);
-  updateCountdown();
 </script>
 </body>
 </html>
