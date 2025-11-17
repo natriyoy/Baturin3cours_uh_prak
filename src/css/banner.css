@@ -136,7 +136,7 @@ header {
 
 .banner-decoration {
   position: absolute;
-  font-size: 8rem;
+  font-size: 1rem;
   opacity: 0.1;
   z-index: 1;
   filter: brightness(0.8);
@@ -373,6 +373,9 @@ header {
 }
 /* Адаптивность */
 @media (max-width: 768px) {
+  .banner-decoration {
+    display: none;
+  }
   header {
     left: 20px;
     position: absolute;
