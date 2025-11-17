@@ -10,6 +10,7 @@
 
 </head>
 <body>
+
 <header>
   <nav class="nav glass">
     <div class="logo">
@@ -26,6 +27,65 @@
   </nav>
 </header>
 
+<div class="container">
+  <div class="promo-banner glass">
+    <div class="badge">Добро пожаловать!</div>
+    <h1 class="title">Скоро открытие <span class="highlight">Не только бананы</span></h1>
+    <div class="banner-decoration decoration-1">🍍</div>
+    <div class="banner-decoration decoration-2">🥭</div>
+    <div class="banner-decoration decoration-3">🍈</div>
+    <div class="banner-decoration decoration-4">🍉</div>
+
+    <div class="containers">
+      <!-- Прыгающие фрукты -->
+      <div class="fruit apple">🍍</div>
+      <div class="fruit orange">🥭</div>
+      <div class="fruit lemon">🍈</div>
+      <div class="fruit grape">🍉</div>
+
+    </div>
+
+    <p class="description">Первым 100 клиентам - скидка 30% на первую покупку! Оставьте email и мы сообщим вам об открытии.</p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🚚</div>
+        <span>Бесплатная доставка</span>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⭐</div>
+        <span>Гарантия свежести</span>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎁</div>
+        <span>Подарок к заказу</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="promo-banner glass">
+    <div class="badge">СКОРО ОТКРЫТИЕ</div>
+    <h1 class="title">Fruit Paradise <span class="highlight">открывается</span> скоро!</h1>
+    <p class="description">Первым 100 клиентам - скидка 30% на первую покупку! Оставьте email и мы сообщим вам об открытии.</p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🚚</div>
+        <span>Бесплатная доставка</span>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⭐</div>
+        <span>Гарантия свежести</span>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎁</div>
+        <span>Подарок к заказу</span>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container">
   <div class="promo-banner glass">
     <div class="badge">СКОРО ОТКРЫТИЕ</div>
@@ -71,13 +131,19 @@
   </div>
 </div>
 <script>
+  // Загрузка темы из локального хранилища при загрузке страницы
+  document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme') || 'light-theme';
+    document.body.className = savedTheme;
+  });
+
+  // Переключение темы с сохранением
   document.getElementById('themeToggle').addEventListener('click', function() {
     const currentTheme = document.body.className;
-    if (currentTheme === 'light-theme') {
-      document.body.className = 'dark-theme';
-    } else {
-      document.body.className = 'light-theme';
-    }
+    const newTheme = currentTheme === 'light-theme' ? 'dark-theme' : 'light-theme';
+
+    document.body.className = newTheme;
+    localStorage.setItem('theme', newTheme);
   });
 </script>
 </body>

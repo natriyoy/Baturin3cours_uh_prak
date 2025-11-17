@@ -15,10 +15,11 @@
 
 body {
 
-  color: var(--light-text);
+  background: linear-gradient(0deg, var(#FFFF7E));
+  color: var(--light);
   min-height: 100vh;
   padding: 0;
-  margin: 160px 50px 10px 50px;
+  margin: 160px 100px 10px 100px;
   font-family: 'Inter', 'Sh', sans-serif;
   line-height: 1.6;
 }
@@ -26,7 +27,7 @@ body {
 
 /* светлая тема */
 body.light-theme {
-  background: linear-gradient(0deg, var(--light));
+  background: linear-gradient(#FFE135, var(--light), var(--light));
   color: #000000;
 }
 .glass.light-theme {
@@ -40,7 +41,7 @@ body.light-theme {
 }
 
 body.dark-theme {
-  background: linear-gradient(0deg, var(--dark));
+  background-color: var(--dark);
   color: var(--light);
 
 }
@@ -56,10 +57,10 @@ body.dark-theme {
 }
 
 header {
-  width: calc(100% - 100px);
+  width: calc(100% - 200px);
   position: fixed;
   top: 0px;
-  left: 50px;
+  left: 100px;
   z-index: 1;
   .nav {
     margin-top: 30px;
@@ -126,14 +127,105 @@ header {
     }
   }
 }
+.banner-img {
+  max-width: 1000px;
+  width: 100%;
+}
 
 
+.banner-decoration {
+  position: absolute;
+  font-size: 8rem;
+  opacity: 0.1;
+  z-index: 1;
+  filter: brightness(0.8);
+}
 
+.decoration-1 { top: -30px; left: -30px; }
+.decoration-2 { bottom: -40px; right: -30px; transform: rotate(45deg); }
+.decoration-3 { top: 50%; left: 10%; transform: translateY(-50%); }
+.decoration-4 { bottom: 20%; right: 15%; }
 
+.wrapper {
+  background: #0F0F0F;
 
+}
 
+/* Анимация прыжка */
+@keyframes jump {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-50px);
+  }
+}
 
+/* Анимация прыжка с вращением */
+@keyframes jumpAndSpin {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-60px) rotate(180deg);
+  }
+}
 
+/* Анимация прыжка с упругим эффектом */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-40px) scale(1.1);
+  }
+  50% {
+    transform: translateY(-60px) scale(1.2);
+  }
+  75% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+/* Стили для фруктов */
+.fruit {
+  position: absolute;
+}
+
+/* Яблоко - просто прыгает */
+.apple {
+  font-size: 80px;
+  top: 100px;
+  left: 20%;
+  animation: jump 2s ease-in-out infinite;
+}
+
+/* Апельсин - прыгает и вращается */
+.orange {
+  font-size: 80px;
+
+  top: 150px;
+  left: 40%;
+  animation: jumpAndSpin 3s ease-in-out infinite;
+}
+
+/* Лимон - упругий прыжок */
+.lemon {
+  font-size: 80px;
+  top: 120px;
+  left: 60%;
+  animation: bounce 2.5s ease-in-out infinite;
+}
+
+/* Виноград - маленькие прыжки */
+.grape {
+  font-size: 80px;
+  top: 180px;
+  left: 80%;
+  animation: jump 1.5s ease-in-out infinite;
+  width: 40px;
+  height: 40px;
+}
 
 
 
