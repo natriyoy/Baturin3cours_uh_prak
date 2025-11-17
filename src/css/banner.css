@@ -426,6 +426,14 @@ header {
 }
 
 @media (max-width: 480px) {
+  header {
+    position: absolute;
+    width: calc(100% - 40px);
+  }
+  body {
+
+    margin: 300px 20px 10px 20px;
+  }
   .title {
     font-size: 1.8em;
   }
