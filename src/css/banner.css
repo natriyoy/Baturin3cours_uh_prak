@@ -375,11 +375,13 @@ header {
 @media (max-width: 768px) {
   header {
     position: absolute;
+    width: calc(100% - 40px);
   }
   body {
-    margin-top: 300px;
+
     margin: 300px 20px 10px 20px;
   }
+
   .nav {
     align-items: center;
     text-align: center;
