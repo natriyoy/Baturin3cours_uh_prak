@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Компактный футер</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-bg: #0F0F0F;
+      --dark-gray: #202020;
+      --accent-green: #FFFF7E;
+      --dark-green: #FFE135;
+      --light: #F8F8F8;
+      --dark: #2A2A2A;
+      --light-text: #F8F8F8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--dark-bg);
+      color: var(--light-text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content {
+      flex: 1;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    /* Компактный футер */
+    .footer {
+      background: var(--dark-gray);
+      color: var(--light-text);
+      padding: 30px 0 20px;
+      margin-top: auto;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .footer-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.3em;
+      font-weight: 700;
+      color: var(--accent-green);
+      text-decoration: none;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--light-text);
+      text-decoration: none;
+      opacity: 0.8;
+      transition: all 0.3s ease;
+      font-size: 0.9em;
+    }
+
+    .footer-link:hover {
+      opacity: 1;
+      color: var(--accent-green);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      text-decoration: none;
+      color: var(--light-text);
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background: var(--accent-green);
+      color: var(--dark-bg);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      font-size: 0.8em;
+      opacity: 0.7;
+    }
+
+    .footer-contacts {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      .footer-main {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+
+      .footer-nav {
+        justify-content: center;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+
+      .footer-contacts {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer {
+        padding: 25px 0 15px;
+      }
+
+      .footer-nav {
+        gap: 15px;
+      }
+
+      .footer-social {
+        gap: 8px;
+      }
+
+      .social-link {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  </style>
+</head>
+<body class="dark-theme">
+<!-- Основной контент страницы -->
+<div class="content">
+  <h1>Пример страницы с компактным футером</h1>
+  <p>Основной контент вашего сайта находится здесь</p>
+</div>
+
+<!-- Компактный футер -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-main">
+      <a href="index.html" class="footer-logo">
+        <span>🍍</span>
+        Не только бананы
+      </a>
+
+      <nav class="footer-nav">
+        <a href="index.html" class="footer-link">Главная</a>
+        <a href="catalog.html" class="footer-link">Каталог</a>
+        <a href="about.html" class="footer-link">О нас</a>
+        <a href="contact.html" class="footer-link">Контакты</a>
+      </nav>
+
+      <div class="footer-social">
+        <a href="#" class="social-link" aria-label="Instagram">📷</a>
+        <a href="#" class="social-link" aria-label="Facebook">📘</a>
+        <a href="#" class="social-link" aria-label="VK">👥</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="copyright">
+        © 2023 Не только бананы
+      </div>
+
+      <div class="footer-contacts">
+        <div class="contact-item">
+          <span>📞</span>
+          <span>+7 (999) 123-45-67</span>
+        </div>
+        <div class="contact-item">
+          <span>✉️</span>
+          <span>info@fruits.ru</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

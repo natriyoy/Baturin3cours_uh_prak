@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Не только бананы - О нас</title>
+  <style>
+    :root {
+      --dark-bg: #0F0F0F;
+      --dark-gray: #202020;
+      --accent-green: #FFFF7E;
+      --dark-green: #FFE135;
+      --light: #F8F8F8;
+      --dark: #2A2A2A;
+      --light-text: #F8F8F8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark-bg);
+      color: var(--light-text);
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    h1, h2, h3 {
+      color: var(--accent-green);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--accent-green);
+      padding-bottom: 10px;
+      margin-top: 40px;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-top: 25px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    .highlight {
+      color: var(--accent-green);
+      font-weight: bold;
+    }
+
+    .mission-vision {
+      display: flex;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .mission, .vision {
+      flex: 1;
+      padding: 25px;
+      border-radius: 15px;
+      background: rgba(255, 225, 53, 0.1);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .value-card {
+      padding: 25px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .value-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 225, 53, 0.1);
+    }
+
+    .value-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .service-card {
+      flex: 1;
+      min-width: 250px;
+      padding: 25px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .team-member {
+      text-align: center;
+      padding: 20px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .member-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .stat-item {
+      margin: 15px;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--accent-green);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      margin-top: 5px;
+    }
+
+    @media (max-width: 768px) {
+      .mission-vision {
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="glass">
+    <h1>Не только бананы</h1>
+    <p>Мы — современная компания, специализирующаяся на поставках <span class="highlight">свежих и экзотических фруктов</span> напрямую от проверенных производителей со всего мира. Наша миссия — сделать качественные и полезные продукты доступными каждому.</p>
+
+    <div class="mission-vision">
+      <div class="mission">
+        <h3>Наша миссия</h3>
+        <p>Обеспечивать наших клиентов самыми свежими, вкусными и полезными фруктами, способствуя здоровому образу жизни и гастрономическому разнообразию.</p>
+      </div>
+      <div class="vision">
+        <h3>Наше видение</h3>
+        <p>Стать ведущим поставщиком экзотических фруктов в регионе, известным своим безупречным качеством и сервисом.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass">
+    <h2>Наши ценности</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">🌱</div>
+        <h3>Качество</h3>
+        <p>Мы тщательно отбираем каждый фрукт, сотрудничая только с проверенными поставщиками, которые разделяют наши стандарты качества.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🚚</div>
+        <h3>Свежесть</h3>
+        <p>Оптимизированная логистика позволяет доставлять фрукты от сбора до вашего стола в кратчайшие сроки.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🌍</div>
+        <h3>Устойчивость</h3>
+        <p>Мы заботимся об окружающей среде, используя экологичную упаковку и поддерживая ответственных производителей.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🤝</div>
+        <h3>Партнерство</h3>
+        <p>Мы строим долгосрочные отношения с клиентами и поставщиками, основанные на взаимном уважении и доверии.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass">
+    <h2>Наши услуги</h2>
+    <div class="services">
+      <div class="service-card">
+        <div class="service-icon">🏠</div>
+        <h3>Доставка на дом</h3>
+        <p>Быстрая и удобная доставка свежих фруктов прямо к вашей двери в удобное для вас время.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏢</div>
+        <h3>Корпоративное обслуживание</h3>
+        <p>Регулярные поставки фруктов в офисы для поддержания здоровой атмосферы в коллективе.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎁</div>
+        <h3>Фруктовые корзины</h3>
+        <p>Элегантные подарочные наборы для любых мероприятий — от дней рождений до корпоративных событий.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📦</div>
+        <h3>Фруктовые подписки</h3>
+        <p>Регулярные поставки сезонных фруктов по выгодной подписной модели со скидкой до 20%.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass">
+    <h2>Наша команда</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="member-photo">👨‍💼</div>
+        <h3>Алексей Петров</h3>
+        <p>Основатель и CEO</p>
+      </div>
+      <div class="team-member">
+        <div class="member-photo">👩‍🌾</div>
+        <h3>Мария Иванова</h3>
+        <p>Шеф-закупщик</p>
+      </div>
+      <div class="team-member">
+        <div class="member-photo">👨‍🍳</div>
+        <h3>Дмитрий Сидоров</h3>
+        <p>Контроль качества</p>
+      </div>
+      <div class="team-member">
+        <div class="member-photo">👩‍💻</div>
+        <h3>Ольга Козлова</h3>
+        <p>Маркетинг</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass">
+    <h2>Наши достижения</h2>
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-number">500+</span>
+        <span class="stat-label">Довольных клиентов</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">50+</span>
+        <span class="stat-label">Видов фруктов</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">3</span>
+        <span class="stat-label">Года на рынке</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">98%</span>
+        <span class="stat-label">Положительных отзывов</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

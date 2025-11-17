@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Контакты | Не только бананы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: "Sh";
+      src: url('./src/fonts/OpenSans-Light.ttf') format('truetype');
+    }
+
+    :root {
+      --dark-bg: #0F0F0F;
+      --dark-gray: #202020;
+      --accent-green: #FFFF7E;
+      --dark-green:  #FFE135;
+      --light: #F8F8F8;
+      --dark: #2A2A2A;
+      --light-text: #F8F8F8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--dark-bg);
+      color: var(--light-text);
+      min-height: 100vh;
+      font-family: 'Inter', 'Sh', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* светлая тема */
+    body.light-theme {
+      background: var(--light);
+      color: #000000;
+    }
+    .glass.light-theme {
+      background-color: var(--light);
+      color: #000000;
+    }
+
+    /* темная тема */
+    .glass.dark-theme {
+      background-color: var(--dark);
+    }
+
+    body.dark-theme {
+      background-color: var(--dark);
+      color: var(--light-text);
+    }
+
+    /* фон блоков */
+    .glass {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 25px;
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 20px 40px;
+    }
+
+    header {
+      width: calc(100% - 40px);
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .nav {
+      border-radius: 25px;
+      display: flex;
+      padding: 20px 40px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: var(--accent-green);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      font-size: 1.3em;
+    }
+
+    .nav-menu {
+      list-style: none;
+      gap: 20px;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    .nav-menu-cl {
+      text-decoration: none;
+      color: var(--light-text);
+      padding: 12px 24px;
+      font-weight: 500;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-menu-cl:hover {
+      background: rgba(93, 214, 44, 0.1);
+      color: var(--accent-green);
+    }
+
+    .nav-menu-cl.active {
+      background: rgba(93, 214, 44, 0.1);
+      color: var(--accent-green);
+    }
+
+    .lig-dark {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .page-title {
+      font-size: 3em;
+      color: var(--accent-green);
+      margin-bottom: 20px;
+    }
+
+    .page-subtitle {
+      font-size: 1.2em;
+      opacity: 0.8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    @media (max-width: 968px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-form-container, .contact-info {
+      padding: 40px;
+    }
+
+    .form-title {
+      font-size: 2em;
+      margin-bottom: 30px;
+      color: var(--accent-green);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-label {
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .form-input, .form-textarea {
+      padding: 18px 25px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--light-text);
+      font-size: 1em;
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--accent-green);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .form-textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, var(--accent-green), var(--dark-green));
+      color: var(--dark-bg);
+      border: none;
+      padding: 18px 35px;
+      font-size: 1.1em;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(93, 214, 44, 0.3);
+      margin-top: 10px;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(93, 214, 44, 0.5);
+    }
+
+    .contact-info h2 {
+      font-size: 2em;
+      margin-bottom: 30px;
+      color: var(--accent-green);
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .contact-icon {
+      font-size: 1.8em;
+      width: 50px;
+      flex-shrink: 0;
+    }
+
+    .contact-text h3 {
+      margin-bottom: 8px;
+      color: var(--accent-green);
+    }
+
+    .contact-text p {
+      opacity: 0.8;
+    }
+
+    .map-container {
+      border-radius: 20px;
+      overflow: hidden;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .map-icon {
+      font-size: 4em;
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+
+    .social-section {
+      text-align: center;
+      padding: 40px;
+    }
+
+    .social-title {
+      font-size: 2em;
+      margin-bottom: 30px;
+      color: var(--accent-green);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      text-decoration: none;
+      color: inherit;
+      padding: 25px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+      min-width: 150px;
+    }
+
+    .social-link:hover {
+      background: rgba(255, 225, 53, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .social-icon {
+      font-size: 2.5em;
+    }
+
+    .social-name {
+      font-weight: 500;
+    }
+
+    .business-hours {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .hours-title {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      color: var(--accent-green);
+    }
+
+    .hours-list {
+      display: inline-block;
+      text-align: left;
+    }
+
+    .hours-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 10px;
+    }
+
+    .day {
+      font-weight: 500;
+    }
+
+    .time {
+      opacity: 0.8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      margin-top: 50px;
+      opacity: 0.7;
+      font-size: 0.9em;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      .container {
+        padding: 100px 15px 30px;
+      }
+
+      header {
+        width: calc(100% - 30px);
+        left: 15px;
+      }
+
+      .nav {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .page-title {
+        font-size: 2.2em;
+      }
+
+      .contact-form-container, .contact-info {
+        padding: 30px 20px;
+      }
+
+      .social-links {
+        gap: 15px;
+      }
+
+      .social-link {
+        min-width: 120px;
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page-title {
+        font-size: 1.8em;
+      }
+
+      .contact-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+
+      .social-links {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .social-link {
+        width: 100%;
+        max-width: 200px;
+      }
+    }
+  </style>
+</head>
+<body class="dark-theme">
+
+<header>
+  <nav class="nav glass">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">🍍</span>
+      Не только бананы
+    </a>
+
+    <ul class="nav-menu">
+      <li><a class="nav-menu-cl" href="index.html">Главная</a></li>
+      <li><a class="nav-menu-cl" href="catalog.html">Каталог</a></li>
+      <li><a class="nav-menu-cl" href="about.html">О нас</a></li>
+      <li><a class="nav-menu-cl active" href="contact.html">Контакты</a></li>
+      <li><button class="lig-dark nav-menu-cl" id="themeToggle">Тема</button></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="page-header">
+    <h1 class="page-title">Свяжитесь с нами</h1>
+    <p class="page-subtitle">Есть вопросы или предложения? Мы всегда рады помочь! Напишите нам или позвоните - мы на связи.</p>
+  </div>
+
+  <div class="contact-grid">
+    <!-- Форма обратной связи -->
+    <div class="glass contact-form-container">
+      <h2 class="form-title">Обратная связь</h2>
+      <form class="contact-form" id="feedbackForm">
+        <div class="form-group">
+          <label class="form-label" for="name">Ваше имя</label>
+          <input type="text" id="name" class="form-input" placeholder="Как к вам обращаться?" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input type="email" id="email" class="form-input" placeholder="example@mail.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="phone">Телефон</label>
+          <input type="tel" id="phone" class="form-input" placeholder="+7 (XXX) XXX-XX-XX">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="subject">Тема сообщения</label>
+          <input type="text" id="subject" class="form-input" placeholder="О чем вы хотите рассказать?" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="message">Сообщение</label>
+          <textarea id="message" class="form-textarea" placeholder="Расскажите подробнее..." required></textarea>
+        </div>
+
+        <button type="submit" class="cta-button">Отправить сообщение</button>
+      </form>
+    </div>
+
+    <!-- Контактная информация -->
+    <div class="glass contact-info">
+      <h2>Наши контакты</h2>
+      <div class="contact-details">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-text">
+            <h3>Адрес</h3>
+            <p>г. Москва, ул. Фруктовая, д. 15<br>Бизнес-центр "Фреш", 3 этаж</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-text">
+            <h3>Телефоны</h3>
+            <p>+7 (999) 123-45-67<br>+7 (495) 765-43-21</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-text">
+            <h3>Email</h3>
+            <p>info@fruitsparadise.ru<br>order@fruitsparadise.ru</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">🕒</div>
+          <div class="contact-text">
+            <h3>Режим работы</h3>
+            <p>Пн-Пт: 9:00 - 21:00<br>Сб-Вс: 10:00 - 20:00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Карта -->
+  <div class="glass map-container">
+    <div class="map-placeholder">
+      <div class="map-icon">🗺️</div>
+      <h3>Мы находимся здесь</h3>
+      <p>г. Москва, ул. Фруктовая, д. 15</p>
+      <p style="margin-top: 15px; opacity: 0.7;">(Здесь будет интерактивная карта)</p>
+    </div>
+  </div>
+
+  <!-- Соцсети -->
+  <div class="glass social-section">
+    <h2 class="social-title">Мы в социальных сетях</h2>
+    <div class="social-links">
+      <a href="#" class="social-link">
+        <div class="social-icon">📘</div>
+        <span class="social-name">Facebook</span>
+      </a>
+
+      <a href="#" class="social-link">
+        <div class="social-icon">📷</div>
+        <span class="social-name">Instagram</span>
+      </a>
+
+      <a href="#" class="social-link">
+        <div class="social-icon">🐦</div>
+        <span class="social-name">Twitter</span>
+      </a>
+
+      <a href="#" class="social-link">
+        <div class="social-icon">📹</div>
+        <span class="social-name">YouTube</span>
+      </a>
+
+      <a href="#" class="social-link">
+        <div class="social-icon">💼</div>
+        <span class="social-name">LinkedIn</span>
+      </a>
+    </div>
+
+    <div class="business-hours">
+      <h3 class="hours-title">Часы работы</h3>
+      <div class="hours-list">
+        <div class="hours-item">
+          <span class="day">Понедельник - Пятница:</span>
+          <span class="time">9:00 - 21:00</span>
+        </div>
+        <div class="hours-item">
+          <span class="day">Суббота:</span>
+          <span class="time">10:00 - 20:00</span>
+        </div>
+        <div class="hours-item">
+          <span class="day">Воскресенье:</span>
+          <span class="time">10:00 - 20:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2023 Не только бананы. Все права защищены.</p>
+</footer>
+
+<script>
+  // Загрузка темы из локального хранилища при загрузке страницы
+  document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme') || 'dark-theme';
+    document.body.className = savedTheme;
+
+    // Обработка формы
+    const feedbackForm = document.getElementById('feedbackForm');
+    if (feedbackForm) {
+      feedbackForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Здесь будет код для отправки формы
+        alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+        feedbackForm.reset();
+      });
+    }
+  });
+
+  // Переключение темы с сохранением
+  document.getElementById('themeToggle').addEventListener('click', function() {
+    const currentTheme = document.body.className;
+    const newTheme = currentTheme === 'light-theme' ? 'dark-theme' : 'light-theme';
+
+    document.body.className = newTheme;
+    localStorage.setItem('theme', newTheme);
+  });
+</script>
+</body>
+</html>

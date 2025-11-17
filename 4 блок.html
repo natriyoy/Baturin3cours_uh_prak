@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Не только бананы - Секретный ингредиент</title>
+  <style>
+    :root {
+      --dark-bg: #0F0F0F;
+      --dark-gray: #202020;
+      --accent-green: #FFFF7E;
+      --dark-green: #FFE135;
+      --light: #F8F8F8;
+      --dark: #2A2A2A;
+      --light-text: #F8F8F8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark-bg);
+      color: var(--light-text);
+      line-height: 1.6;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    .secret-section {
+      background: linear-gradient(135deg, rgba(255, 225, 53, 0.1), rgba(255, 255, 126, 0.05));
+      backdrop-filter: blur(15px);
+      border-radius: 25px;
+      padding: 50px 40px;
+      border: 1px solid rgba(255, 225, 53, 0.3);
+      box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 225, 53, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .secret-section::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 225, 53, 0.1) 0%, transparent 70%);
+      animation: pulse 8s infinite alternate;
+      z-index: -1;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.8); opacity: 0.3; }
+      100% { transform: scale(1.2); opacity: 0.6; }
+    }
+
+    .secret-header {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .secret-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      display: block;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .secret-title {
+      font-size: 2.8rem;
+      color: var(--accent-green);
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px rgba(255, 225, 53, 0.3);
+    }
+
+    .secret-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .secret-content {
+      background: rgba(15, 15, 15, 0.7);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+
+    .secret-text {
+      font-size: 1.4rem;
+      text-align: center;
+      line-height: 1.8;
+      margin-bottom: 25px;
+      font-weight: 500;
+    }
+
+    .secret-highlight {
+      color: var(--accent-green);
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(255, 225, 53, 0.5);
+    }
+
+    .instruction-box {
+      background: rgba(255, 225, 53, 0.1);
+      border-radius: 15px;
+      padding: 25px;
+      margin-top: 30px;
+      border-left: 4px solid var(--accent-green);
+    }
+
+    .instruction-title {
+      font-size: 1.3rem;
+      color: var(--accent-green);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .instruction-title::before {
+      content: "📦";
+      font-size: 1.5rem;
+    }
+
+    .instruction-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .step {
+      flex: 1;
+      min-width: 200px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .step:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 225, 53, 0.15);
+    }
+
+    .step-number {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background: var(--accent-green);
+      color: var(--dark-bg);
+      border-radius: 50%;
+      line-height: 40px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .step-text {
+      font-size: 1.1rem;
+    }
+
+    .cta-section {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, var(--accent-green), var(--dark-green));
+      color: var(--dark-bg);
+      border: none;
+      padding: 18px 35px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(93, 214, 44, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(93, 214, 44, 0.5);
+    }
+
+    .secret-footer {
+      text-align: center;
+      margin-top: 40px;
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    .floating-elements {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .floating-element {
+      position: absolute;
+      font-size: 1.5rem;
+      opacity: 0.1;
+      animation: floatAround 15s infinite linear;
+    }
+
+    .floating-element:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+    .floating-element:nth-child(2) { top: 70%; left: 10%; animation-delay: 2s; }
+    .floating-element:nth-child(3) { top: 30%; right: 5%; animation-delay: 4s; }
+    .floating-element:nth-child(4) { bottom: 20%; right: 15%; animation-delay: 6s; }
+    .floating-element:nth-child(5) { top: 50%; left: 20%; animation-delay: 8s; }
+
+    @keyframes floatAround {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(20px, 20px) rotate(90deg); }
+      50% { transform: translate(0, 40px) rotate(180deg); }
+      75% { transform: translate(-20px, 20px) rotate(270deg); }
+      100% { transform: translate(0, 0) rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      .secret-title {
+        font-size: 2.2rem;
+      }
+
+      .secret-text {
+        font-size: 1.2rem;
+      }
+
+      .instruction-steps {
+        flex-direction: column;
+      }
+
+      .step {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <section class="secret-section">
+    <div class="floating-elements">
+      <div class="floating-element">🍍</div>
+      <div class="floating-element">🥭</div>
+      <div class="floating-element">🍈</div>
+      <div class="floating-element">🍉</div>
+      <div class="floating-element">🥝</div>
+    </div>
+
+    <div class="secret-header">
+      <span class="secret-icon">🤫</span>
+      <h1 class="secret-title">Секретный ингредиент</h1>
+      <p class="secret-subtitle">То, что вы искали, но не знали как назвать</p>
+    </div>
+
+    <div class="secret-content">
+      <p class="secret-text">
+        <span class="secret-highlight">Гарантируем:</span> ваши гости будут в шоке. Возможно, даже убегут.
+      </p>
+
+      <div class="instruction-box">
+        <h3 class="instruction-title">Инструкция по применению:</h3>
+        <div class="instruction-steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-text">Распакуйте</div>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-text">Устройте хаос</div>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-text">Повторите</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="secret-text">
+        Главный ингредиент для салата <span class="secret-highlight">"Что это было?!"</span>
+      </p>
+    </div>
+
+    <div class="cta-section">
+      <button class="cta-button">
+        <span>Получить ингредиент</span>
+        <span>✨</span>
+      </button>
+    </div>
+
+    <div class="secret-footer">
+      *результат может отличаться от ожиданий. ответственность за последствия несёт потребитель
+    </div>
+  </section>
+</div>
+</body>
+</html>

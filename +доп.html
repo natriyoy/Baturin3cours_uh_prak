@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Корзина | Не только бананы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-bg: #0F0F0F;
+      --dark-gray: #202020;
+      --accent-green: #FFFF7E;
+      --dark-green: #FFE135;
+      --light: #F8F8F8;
+      --dark: #2A2A2A;
+      --light-text: #F8F8F8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--dark-bg);
+      color: var(--light-text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* светлая тема */
+    body.light-theme {
+      background: var(--light);
+      color: #000000;
+    }
+    .glass.light-theme {
+      background-color: var(--light);
+      color: #000000;
+    }
+
+    /* темная тема */
+    .glass.dark-theme {
+      background-color: var(--dark);
+    }
+
+    body.dark-theme {
+      background-color: var(--dark);
+      color: var(--light-text);
+    }
+
+    /* фон блоков */
+    .glass {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 20px;
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 100px 20px 40px;
+    }
+
+    header {
+      width: calc(100% - 40px);
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .nav {
+      border-radius: 25px;
+      display: flex;
+      padding: 20px 40px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: var(--accent-green);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      font-size: 1.3em;
+    }
+
+    .nav-menu {
+      list-style: none;
+      gap: 20px;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    .nav-menu-cl {
+      text-decoration: none;
+      color: var(--light-text);
+      padding: 12px 24px;
+      font-weight: 500;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-menu-cl:hover {
+      background: rgba(93, 214, 44, 0.1);
+      color: var(--accent-green);
+    }
+
+    .nav-menu-cl.active {
+      background: rgba(93, 214, 44, 0.1);
+      color: var(--accent-green);
+    }
+
+    .cart-count {
+      background: var(--accent-green);
+      color: var(--dark-bg);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.8em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: -5px;
+      right: -5px;
+    }
+
+    .lig-dark {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-title {
+      font-size: 2.5em;
+      color: var(--accent-green);
+      margin-bottom: 10px;
+    }
+
+    .page-subtitle {
+      font-size: 1.1em;
+      opacity: 0.8;
+    }
+
+    .cart-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .cart-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cart-items {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .cart-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .item-icon {
+      font-size: 2.5em;
+      width: 60px;
+      text-align: center;
+    }
+
+    .item-details {
+      flex: 1;
+    }
+
+    .item-name {
+      font-size: 1.2em;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--accent-green);
+    }
+
+    .item-price {
+      opacity: 0.8;
+      font-size: 1.1em;
+    }
+
+    .item-controls {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 5px;
+    }
+
+    .quantity-btn {
+      background: none;
+      border: none;
+      color: var(--light-text);
+      font-size: 1.2em;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .quantity-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .quantity {
+      min-width: 30px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #ff6b6b;
+      font-size: 1.3em;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .remove-btn:hover {
+      background: rgba(255, 107, 107, 0.1);
+      transform: scale(1.1);
+    }
+
+    .cart-summary {
+      padding: 30px;
+      height: fit-content;
+      position: sticky;
+      top: 120px;
+    }
+
+    .summary-title {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      color: var(--accent-green);
+      text-align: center;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .summary-total {
+      font-size: 1.3em;
+      font-weight: 700;
+      color: var(--accent-green);
+      margin-top: 10px;
+      padding-top: 15px;
+      border-top: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .checkout-btn {
+      background: linear-gradient(135deg, var(--accent-green), var(--dark-green));
+      color: var(--dark-bg);
+      border: none;
+      padding: 18px;
+      font-size: 1.1em;
+      font-weight: 600;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(93, 214, 44, 0.3);
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .checkout-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(93, 214, 44, 0.5);
+    }
+
+    .continue-shopping {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .continue-link {
+      color: var(--accent-green);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .continue-link:hover {
+      gap: 12px;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 60px 40px;
+    }
+
+    .empty-icon {
+      font-size: 4em;
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+
+    .empty-title {
+      font-size: 1.8em;
+      margin-bottom: 15px;
+      color: var(--accent-green);
+    }
+
+    .empty-text {
+      opacity: 0.8;
+      margin-bottom: 30px;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      .container {
+        padding: 90px 15px 30px;
+      }
+
+      header {
+        width: calc(100% - 30px);
+        left: 15px;
+      }
+
+      .nav {
+        padding: 15px 20px;
+      }
+
+      .page-title {
+        font-size: 2em;
+      }
+
+      .cart-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+
+      .item-controls {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page-title {
+        font-size: 1.7em;
+      }
+
+      .cart-item {
+        padding: 20px;
+      }
+
+      .item-icon {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body class="dark-theme">
+
+<header>
+  <nav class="nav glass">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">🍍</span>
+      Не только бананы
+    </a>
+
+    <ul class="nav-menu">
+      <li><a class="nav-menu-cl" href="index.html">Главная</a></li>
+      <li><a class="nav-menu-cl" href="catalog.html">Каталог</a></li>
+      <li><a class="nav-menu-cl" href="about.html">О нас</a></li>
+      <li><a class="nav-menu-cl" href="contact.html">Контакты</a></li>
+      <li><a class="nav-menu-cl active" href="cart.html">
+        Корзина
+        <span class="cart-count">3</span>
+      </a></li>
+      <li><button class="lig-dark nav-menu-cl" id="themeToggle">Тема</button></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="page-header">
+    <h1 class="page-title">Ваша корзина</h1>
+    <p class="page-subtitle">Товары, которые вы выбрали</p>
+  </div>
+
+  <div class="cart-container">
+    <!-- Список товаров -->
+    <div class="cart-items">
+      <div class="glass cart-item">
+        <div class="item-icon">🍍</div>
+        <div class="item-details">
+          <div class="item-name">Сочный ананас</div>
+          <div class="item-price">450 ₽/кг</div>
+        </div>
+        <div class="item-controls">
+          <div class="quantity-controls">
+            <button class="quantity-btn">-</button>
+            <span class="quantity">1</span>
+            <button class="quantity-btn">+</button>
+          </div>
+          <button class="remove-btn">🗑️</button>
+        </div>
+      </div>
+
+      <div class="glass cart-item">
+        <div class="item-icon">🥭</div>
+        <div class="item-details">
+          <div class="item-name">Сладкое манго</div>
+          <div class="item-price">620 ₽/кг</div>
+        </div>
+        <div class="item-controls">
+          <div class="quantity-controls">
+            <button class="quantity-btn">-</button>
+            <span class="quantity">2</span>
+            <button class="quantity-btn">+</button>
+          </div>
+          <button class="remove-btn">🗑️</button>
+        </div>
+      </div>
+
+      <div class="glass cart-item">
+        <div class="item-icon">🍓</div>
+        <div class="item-details">
+          <div class="item-name">Свежая клубника</div>
+          <div class="item-price">890 ₽/кг</div>
+        </div>
+        <div class="item-controls">
+          <div class="quantity-controls">
+            <button class="quantity-btn">-</button>
+            <span class="quantity">1</span>
+            <button class="quantity-btn">+</button>
+          </div>
+          <button class="remove-btn">🗑️</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Итоговая информация -->
+    <div class="glass cart-summary">
+      <h3 class="summary-title">Ваш заказ</h3>
+
+      <div class="summary-row">
+        <span>Товары (3)</span>
+        <span>2 580 ₽</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Доставка</span>
+        <span>Бесплатно</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Скидка</span>
+        <span style="color: var(--accent-green);">-774 ₽</span>
+      </div>
+
+      <div class="summary-row summary-total">
+        <span>Итого</span>
+        <span>1 806 ₽</span>
+      </div>
+
+      <button class="checkout-btn">Оформить заказ</button>
+
+      <div class="continue-shopping">
+        <a href="catalog.html" class="continue-link">
+          ← Продолжить покупки
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Загрузка темы из локального хранилища при загрузке страницы
+  document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme') || 'dark-theme';
+    document.body.className = savedTheme;
+
+    // Обработчики для кнопок количества
+    const quantityBtns = document.querySelectorAll('.quantity-btn');
+    quantityBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const quantityElement = this.parentElement.querySelector('.quantity');
+        let quantity = parseInt(quantityElement.textContent);
+
+        if (this.textContent === '+') {
+          quantity++;
+        } else if (this.textContent === '-' && quantity > 1) {
+          quantity--;
+        }
+
+        quantityElement.textContent = quantity;
+        updateCartTotal();
+      });
+    });
+
+    // Обработчики для кнопок удаления
+    const removeBtns = document.querySelectorAll('.remove-btn');
+    removeBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const cartItem = this.closest('.cart-item');
+        cartItem.style.opacity = '0';
+        setTimeout(() => {
+          cartItem.remove();
+          updateCartTotal();
+          updateCartCount();
+        }, 300);
+      });
+    });
+
+    // Функция обновления общей суммы
+    function updateCartTotal() {
+      // Здесь будет логика пересчета суммы
+      console.log('Обновление суммы корзины');
+    }
+
+    // Функция обновления счетчика товаров
+    function updateCartCount() {
+      const cartCount = document.querySelector('.cart-count');
+      const itemsCount = document.querySelectorAll('.cart-item').length;
+      cartCount.textContent = itemsCount;
+    }
+
+    // Обработка кнопки оформления заказа
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    checkoutBtn.addEventListener('click', function() {
+      alert('Заказ успешно оформлен! Спасибо за покупку!');
+    });
+  });
+
+  // Переключение темы с сохранением
+  document.getElementById('themeToggle').addEventListener('click', function() {
+    const currentTheme = document.body.className;
+    const newTheme = currentTheme === 'light-theme' ? 'dark-theme' : 'light-theme';
+
+    document.body.className = newTheme;
+    localStorage.setItem('theme', newTheme);
+  });
+</script>
+</body>
+</html>
