@@ -6,8 +6,8 @@
 :root {
   --dark-bg: #0F0F0F;
   --dark-gray: #202020;
-  --accent-green: #5DD62C;
-  --dark-green: #337418;
+  --accent-green: #FFFF7E;
+  --dark-green:  #FFE135;
 
   --light: #F8F8F8;
   --dark: #2A2A2A;
@@ -18,7 +18,7 @@ body {
   color: var(--light-text);
   min-height: 100vh;
   padding: 0;
-  margin: 160px 10px 10px 10px;
+  margin: 160px 50px 10px 50px;
   font-family: 'Inter', 'Sh', sans-serif;
   line-height: 1.6;
 }
@@ -56,10 +56,10 @@ body.dark-theme {
 }
 
 header {
-  width: calc(100% - 20px);
+  width: calc(100% - 100px);
   position: fixed;
   top: 0px;
-  left: 5px;
+  left: 50px;
   z-index: 1;
   .nav {
     margin-top: 30px;
